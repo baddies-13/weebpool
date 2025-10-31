@@ -77,10 +77,10 @@ if (isset($_GET['user_id'])) {
 
         h2 {
             font-size: 2rem;
-            color: #2575fc;
+            color: #ff4da6;
             margin-bottom: 15px;
             text-transform: uppercase;
-            border-bottom: 2px solid #2575fc;
+            border-bottom: 2px solid #ff4da6;
             padding-bottom: 5px;
         }
 
