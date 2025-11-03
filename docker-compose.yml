@@ -26,6 +26,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - ./php/init.sql:/docker-entrypoint-initdb.d/init.sql
       - db_data:/var/lib/mysql
     networks:
       - webnet

@@ -18,7 +18,7 @@ if (isset($_GET['user_id'])) {
             $stmt->execute();
             $experiences_result = $stmt->get_result();
 
-            $education_query = "SELECT * FROM education WHERE user_id = ?";
+            $education_query = "SELECT * FROM educations WHERE user_id = ?";
             $stmt = $mysqli->prepare($education_query);
             $stmt->bind_param('i', $user_id);
             $stmt->execute();
@@ -99,6 +99,7 @@ if (isset($_GET['user_id'])) {
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
+        
 
         .profile-section img {
             width: 150px;
@@ -128,13 +129,82 @@ if (isset($_GET['user_id'])) {
             font-style: italic;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #f4f6f9;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #ff4da6;
+        }
+
+        .home-section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .home-section h2 {
+            color: #ff4da6;
+            margin-bottom: 15px;
+        }
+
+        .edit-link {
+            background-color: #ff4da6;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.2s; }
+        .fade-in:nth-child(2) { animation-delay: 0.4s; }
+        .fade-in:nth-child(3) { animation-delay: 0.6s; }
+        .fade-in:nth-child(4) { animation-delay: 0.8s; }
+        .fade-in:nth-child(5) { animation-delay: 1.0s; }
+        .fade-in:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar {
+                position: static;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .navbar a {
+                display: inline-block;
+                margin: 5px 10px;
             }
 
             .container {
-                padding: 10px;
+                padding: 15px;
             }
 
             .profile-section {
@@ -149,6 +219,38 @@ if (isset($_GET['user_id'])) {
             }
 
             h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .navbar a {
+                font-size: 1.4rem;
+                margin: 5px;
+            }
+
+            .profile-section img {
+                width: 120px;
+                height: 120px;
+            }
+
+            h1 {
                 font-size: 2rem;
             }
 
@@ -159,20 +261,32 @@ if (isset($_GET['user_id'])) {
             section {
                 padding: 15px;
             }
+
+            ul li {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <nav class="navbar">
+        <a href="#profile">Profile</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="edit.php?user_id=<?= $user_id ?>" class="edit-link">Edit Resume</a>
+    </nav>
+
     <div class="container">
         <h1>User Resume</h1>
 
         <?php if ($user): ?>
-            <div class="profile-section">
-                <img src="<?= isset($user['photo']) ? $user['photo'] : 'default.jpg' ?>" src="../images/image.jpg" alt="" />
+            <div id="profile" class="profile-section fade-in">
+                <img src="<?= isset($user['photo']) && $user['photo'] ? $user['photo'] : '../images/image.jpg' ?>" alt="Profile Photo" />
                 <div>
                     <p><strong>Name:</strong> <?= $user['first_name'] ?> <?= $user['last_name'] ?></p>
-                    <p><strong>Email:</strong> <?= $user['email'] ?></p>
+                    <p><strong>Email:</strong> <a href="mailto:<?= $user['email'] ?>"><?= $user['email'] ?></a></p>
                     <p><strong>Phone:</strong> <?= isset($user['phone_number']) ? $user['phone_number'] : 'Not available' ?></p>
                 </div>
             </div>
@@ -181,8 +295,8 @@ if (isset($_GET['user_id'])) {
         <?php endif; ?>
 
         <?php if ($experiences_result->num_rows > 0): ?>
-            <section>
-                <h2>Work Experience</h2>
+            <section id="experience" class="fade-in">
+                <h2>Experience</h2>
                 <ul>
                     <?php while ($experience = $experiences_result->fetch_assoc()): ?>
                         <li>
@@ -196,11 +310,14 @@ if (isset($_GET['user_id'])) {
                 </ul>
             </section>
         <?php else: ?>
-            <p class="no-data">No work experience available.</p>
+            <section id="experience" class="fade-in">
+                <h2>Experience</h2>
+                <p class="no-data">No work experience available.</p>
+            </section>
         <?php endif; ?>
 
         <?php if ($education_result->num_rows > 0): ?>
-            <section>
+            <section id="education" class="fade-in">
                 <h2>Education</h2>
                 <ul>
                     <?php while ($education = $education_result->fetch_assoc()): ?>
@@ -214,11 +331,14 @@ if (isset($_GET['user_id'])) {
                 </ul>
             </section>
         <?php else: ?>
-            <p class="no-data">No education details available.</p>
+            <section id="education" class="fade-in">
+                <h2>Education</h2>
+                <p class="no-data">No education details available.</p>
+            </section>
         <?php endif; ?>
 
         <?php if ($skills_result->num_rows > 0): ?>
-            <section>
+            <section id="skills" class="fade-in">
                 <h2>Skills</h2>
                 <ul>
                     <?php while ($skill = $skills_result->fetch_assoc()): ?>
@@ -229,7 +349,10 @@ if (isset($_GET['user_id'])) {
                 </ul>
             </section>
         <?php else: ?>
-            <p class="no-data">No skills available.</p>
+            <section id="skills" class="fade-in">
+                <h2>Skills</h2>
+                <p class="no-data">No skills available.</p>
+            </section>
         <?php endif; ?>
     </div>
 
