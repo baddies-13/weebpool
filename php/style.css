@@ -1,6 +1,4 @@
-/* ========================
-   RESET ET FOND
-======================== */
+/* RESET ET FOND */
 * {
     margin: 0;
     padding: 0;
@@ -202,9 +200,7 @@ section {
     padding: 10rem 15%;
 }
 
-/* ========================
-   MAGAZINE LAYOUT STYLES
-======================== */
+/* MAGAZINE LAYOUT STYLES */
 .magazine-layout {
     min-height: 100vh;
     display: flex;
@@ -1038,9 +1034,7 @@ section {
     font-size: 1.6rem;
 }
 
-/* ========================
-   MAGAZINE SECTIONS
-======================== */
+/* MAGAZINE SECTIONS */
 .magazine-section {
     padding: 12rem 0;
     background: var(--bg-color);
@@ -1091,9 +1085,7 @@ section {
     margin-top: 1rem;
 }
 
-/* ========================
-   ABOUT MAGAZINE STYLE
-======================== */
+/* ABOUT MAGAZINE STYLE */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1190,9 +1182,7 @@ section {
     font-style: italic;
 }
 
-/* ========================
-   SERVICES MAGAZINE STYLE
-======================== */
+/* SERVICES MAGAZINE STYLE */
 .services-magazine-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -1291,9 +1281,7 @@ section {
     font-weight: 500;
 }
 
-/* ========================
-   PROJECTS MAGAZINE STYLE
-======================== */
+/* PROJECTS MAGAZINE STYLE */
 .projects-magazine-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -1417,9 +1405,7 @@ section {
     box-shadow: 0 8px 20px rgba(255, 77, 166, 0.3);
 }
 
-/* ========================
-   CONTACT MAGAZINE STYLE
-======================== */
+/* CONTACT MAGAZINE STYLE */
 .contact-magazine-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1575,9 +1561,7 @@ section {
     gap: 1rem;
 }
 
-/* ========================
-   FOOTER MAGAZINE STYLE
-======================== */
+/* FOOTER MAGAZINE STYLE */
 .magazine-footer {
     background: linear-gradient(135deg, var(--bg-color) 0%, var(--second-bg-color) 100%);
     padding: 6rem 0 2rem;
@@ -1736,9 +1720,7 @@ section {
     cursor: pointer;
 }
 
-/* ========================
-   RESPONSIVE MAGAZINE DESIGN
-======================== */
+/* RESPONSIVE MAGAZINE DESIGN */
 @media (max-width: 1200px) {
     .magazine-hero {
         gap: 6rem;
@@ -2076,9 +2058,7 @@ section {
     }
 }
 
-/* ========================
-   FADE-IN
-======================== */
+/* FADE-IN */
 .fade-in {
     opacity: 0;
     transform: translateY(30px) scale(0.9);
